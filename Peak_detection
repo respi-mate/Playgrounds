@@ -103,3 +103,15 @@ for i in 1...indx.count - 1 {
     freq.append(60/(temp * 0.05))
     print(freq.last!)
 }
+
+var data: [Double] = []
+var counter = 0
+for i in 0...samples.count - 1 {
+    if counter > 49 {
+        data.removeFirst()
+    }
+    counter += 1
+    data.append(samples[i])
+    print(data.first!)
+    print("\(data.last!)\n")
+}
