@@ -1,0 +1,38 @@
+import UIKit
+import CoreMotion
+
+class ViewController: UIViewController {
+
+    let motion = CMMotionManager()
+    var timer: Timer!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        motion.startAccelerometerUpdates()
+        motion.startDeviceMotionUpdates()
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.update), userInfo: nil, repeats: true)
+    }
+    
+    @objc func update() {
+        if let data = motion.accelerometerData {
+            //print(data) // print all raw data
+            //let x = data.acceleration.x
+            //let y = data.acceleration.y
+            let z = data.acceleration.z
+            print(z)
+        }
+       
+        if let processedData = motion.deviceMotion {
+            // print(processedData.userAcceleration) // print all raw data
+            //let processedX = processedData.userAcceleration
+            //let processedY = processedData.userAcceleration
+            let processedZ = processedData.userAcceleration.z
+            print(processedZ)
+            
+            // UserAcceleration is defined as the acceleration that the user is giving to the device,
+            // i.e. data has already been processed to remove environmental bias, such as the effects of gravity.
+        }
+    }
+}
